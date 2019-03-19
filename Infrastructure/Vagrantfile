@@ -44,8 +44,8 @@ end
   # documentation for more information about their specific syntax and use.
   # ce.vm.provision "shell", inline: <<-SHELL
    #yum update
-  # yum install httpd -y
-  # service httpd start
-  # SHELL
+   yum install httpd -y
+   service httpd start
+   SHELL
 end
 end
