@@ -1,0 +1,51 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+
+Vagrant.configure("2") do |config|
+  
+ config.vm.define "ub" do |ub|
+ ub.vm.box = "bento/ubuntu-18.04"
+ ub.vm.hostname = "ubuntu1804"
+ ub.vm.network "private_network", :type => 'dhcp'
+ ub.vm.network "public_network", :bridge =>  "lan", :ip => "192.168.0.123" 
+ ub.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
+ ub.vm.provider :virtualbox do |ub|
+ ub.customize [
+      'modifyvm', :id,
+   #  '--natdnshostresolver1', 'on',
+      '--memory', '1024',
+      '--cpus', '1'
+    ]
+  end
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+   #ub.vm.provision "shell", inline: <<-SHELL
+   #apt-get update
+   #apt-get install -y apache2
+   #SHELL
+end  
+  config.vm.define "ce" do |ce|
+  ce.vm.box = "centos/7"
+  ce.vm.hostname = "Centos7"
+ # ce.vm.network "private_network", :ip => "192.168.50.4"
+ ce.vm.network "public_network", :bridge =>  "lan", :ip => "192.168.0.125" 
+ ce.vm.network "forwarded_port", guest: 80, host: 8080, auto_correct: true
+  ce.vm.provider :virtualbox do |ce|
+  ce.customize [
+	  'modifyvm', :id,
+      '--memory', '1024',
+      '--cpus', '1'
+	    ]
+  end
+  # Enable provisioning with a shell script. Additional provisioners such as
+  # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
+  # documentation for more information about their specific syntax and use.
+  # ce.vm.provision "shell", inline: <<-SHELL
+   #yum update
+  # yum install httpd -y
+  # service httpd start
+  # SHELL
+end
+end

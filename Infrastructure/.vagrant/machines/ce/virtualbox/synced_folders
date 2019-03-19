@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"C:/Users/Vova/Desktop/DevOps/Vagrant/Infrastructure","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
